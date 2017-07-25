@@ -1,4 +1,4 @@
-# lagom-template
+# lagom-cassandra-poc
 Building Reactive Java 8 application with Lagom framework. This is a classic CRUD application which persist events in Cassandra Db using Lagom. It also presents a data model for Folio transactions.Here we are using local Cassandra instance instead of the usual embedded one to persist events.
 
 # Prerequisites
