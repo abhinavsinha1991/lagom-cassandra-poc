@@ -64,6 +64,7 @@ public class FolioServiceImpl implements FolioService {
     @Override
     public ServiceCall<Folio, Done> newFolio() {
         return folio -> {
+            System.out.println("sumit :::::::::::::::::::::::::;inside ");
             PersistentEntityRef<FolioCommand> ref = folioEntityRef(folio);
             return ref.ask(FolioCommand.CreateFolio.builder().folio(folio).build());
         };

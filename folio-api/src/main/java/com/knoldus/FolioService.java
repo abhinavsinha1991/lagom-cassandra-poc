@@ -23,7 +23,11 @@ public interface FolioService extends Service {
 
     ServiceCall<NotUsed, Done> deleteFolio(Optional<String> shipCode,
                                            Optional<String> sailDate,Optional<String> bookingId,Optional<Integer> paxId);
-
+/*
+10.16.4.106:8042
+10.16.7.47:8042
+10.16.6.162:8042
+ */
     @Override
     default Descriptor descriptor() {
 

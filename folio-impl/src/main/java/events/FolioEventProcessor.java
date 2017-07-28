@@ -14,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
@@ -61,7 +63,7 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
         return session.executeCreateTable(
                 "CREATE TABLE IF NOT EXISTS Folios ( " +
                         "shipCode TEXT, sailDate TEXT, bookingId TEXT , paxId INT ," +
-                        " folioTransaction TEXT, PRIMARY KEY((shipCode,sailDate),bookingId,paxId))"
+                        " folioTransaction TEXT, createdOn TIMESTAMP, PRIMARY KEY((shipCode,sailDate),bookingId,paxId))"
         );
     }
 
@@ -73,7 +75,7 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
     private CompletionStage<Done> prepareWriteFolio() {
         LOGGER.info(" prepareWriteFolio method ... ");
         return session.prepare(
-                "INSERT INTO Folios (shipCode, sailDate, bookingId, paxId, folioTransaction) VALUES (?, ?, ?, ?, ?)"
+                "INSERT INTO Folios (shipCode, sailDate, bookingId, paxId, folioTransaction, createdOn) VALUES (?, ?, ?, ?, ?, ?)"
         ).thenApply(ps -> {
             setWriteFolios(ps);
             return Done.getInstance();
@@ -93,6 +95,7 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
         bindWriteFolio.setString("bookingId", event.getFolio().getBookingId());
         bindWriteFolio.setInt("paxId", event.getFolio().getPaxId());
         bindWriteFolio.setString("folioTransaction", event.getFolio().getFolioTransaction());
+        bindWriteFolio.setTimestamp("createdOn",Date.valueOf(LocalDateTime.now().toLocalDate()));
         return CassandraReadSide.completedStatements(Arrays.asList(bindWriteFolio));
     }
     /* ******************* END ****************************/
@@ -108,6 +111,7 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
         bindWriteFolio.setString("bookingId", event.getFolio().getBookingId());
         bindWriteFolio.setInt("paxId", event.getFolio().getPaxId());
         bindWriteFolio.setString("folioTransaction", event.getFolio().getFolioTransaction());
+        bindWriteFolio.setTimestamp("createdOn",Date.valueOf(LocalDateTime.now().toLocalDate()));
         return CassandraReadSide.completedStatements(Arrays.asList(bindWriteFolio));
     }
     /* ******************* END ****************************/

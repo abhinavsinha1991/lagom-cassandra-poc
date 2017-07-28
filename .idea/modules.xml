@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cassandra-poc.iml" filepath="$PROJECT_DIR$/cassandra-poc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/folio-api/folio-api.iml" filepath="$PROJECT_DIR$/folio-api/folio-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/folio-impl/folio-impl.iml" filepath="$PROJECT_DIR$/folio-impl/folio-impl.iml" />
+    </modules>
+  </component>
+</project>

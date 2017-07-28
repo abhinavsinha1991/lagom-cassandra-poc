@@ -26,7 +26,7 @@
                 <version>${lagom.version}</version>
                 <configuration>
                     <unmanagedServices>
-                        <cas_native>http://localhost:9042</cas_native>
+                        <cas_native>http://10.16.7.47:8042</cas_native>
                     </unmanagedServices>
                     <cassandraEnabled>false</cassandraEnabled>
                 </configuration>

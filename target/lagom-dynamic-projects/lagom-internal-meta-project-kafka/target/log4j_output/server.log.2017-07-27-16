@@ -1,0 +1,220 @@
+[2017-07-27 16:33:49,200] INFO Kafka data directory is /home/knoldus/Desktop/Lagom/lagom-cassandra-poc/target/lagom-dynamic-projects/lagom-internal-meta-project-kafka/target/kafka_data. (com.lightbend.lagom.internal.kafka.KafkaLocalServer)
+[2017-07-27 16:33:49,460] INFO KafkaConfig values: 
+	advertised.host.name = null
+	metric.reporters = []
+	quota.producer.default = 9223372036854775807
+	offsets.topic.num.partitions = 1
+	log.flush.interval.messages = 9223372036854775807
+	auto.create.topics.enable = true
+	controller.socket.timeout.ms = 30000
+	log.flush.interval.ms = null
+	principal.builder.class = class org.apache.kafka.common.security.auth.DefaultPrincipalBuilder
+	replica.socket.receive.buffer.bytes = 65536
+	min.insync.replicas = 1
+	replica.fetch.wait.max.ms = 500
+	num.recovery.threads.per.data.dir = 1
+	ssl.keystore.type = JKS
+	sasl.mechanism.inter.broker.protocol = GSSAPI
+	default.replication.factor = 1
+	ssl.truststore.password = null
+	log.preallocate = false
+	sasl.kerberos.principal.to.local.rules = [DEFAULT]
+	fetch.purgatory.purge.interval.requests = 1000
+	ssl.endpoint.identification.algorithm = null
+	replica.socket.timeout.ms = 30000
+	message.max.bytes = 1000012
+	num.io.threads = 8
+	offsets.commit.required.acks = -1
+	log.flush.offset.checkpoint.interval.ms = 60000
+	delete.topic.enable = false
+	quota.window.size.seconds = 1
+	ssl.truststore.type = JKS
+	offsets.commit.timeout.ms = 5000
+	quota.window.num = 11
+	zookeeper.connect = localhost:2181
+	authorizer.class.name = 
+	num.replica.fetchers = 1
+	log.retention.ms = null
+	log.roll.jitter.hours = 0
+	log.cleaner.enable = true
+	offsets.load.buffer.size = 5242880
+	log.cleaner.delete.retention.ms = 86400000
+	ssl.client.auth = none
+	controlled.shutdown.max.retries = 3
+	queued.max.requests = 500
+	offsets.topic.replication.factor = 1
+	log.cleaner.threads = 1
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	socket.request.max.bytes = 104857600
+	ssl.trustmanager.algorithm = PKIX
+	zookeeper.session.timeout.ms = 6000
+	log.retention.bytes = -1
+	log.message.timestamp.type = CreateTime
+	sasl.kerberos.min.time.before.relogin = 60000
+	zookeeper.set.acl = false
+	connections.max.idle.ms = 600000
+	offsets.retention.minutes = 1440
+	replica.fetch.backoff.ms = 1000
+	inter.broker.protocol.version = 0.10.0-IV1
+	log.retention.hours = 168
+	num.partitions = 1
+	broker.id.generation.enable = true
+	listeners = PLAINTEXT://:9092
+	ssl.provider = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	log.roll.ms = null
+	log.flush.scheduler.interval.ms = 9223372036854775807
+	ssl.cipher.suites = null
+	log.index.size.max.bytes = 10485760
+	ssl.keymanager.algorithm = SunX509
+	security.inter.broker.protocol = PLAINTEXT
+	replica.fetch.max.bytes = 1048576
+	advertised.port = null
+	log.cleaner.dedupe.buffer.size = 134217728
+	replica.high.watermark.checkpoint.interval.ms = 5000
+	log.cleaner.io.buffer.size = 524288
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	zookeeper.connection.timeout.ms = 6000
+	controlled.shutdown.retry.backoff.ms = 5000
+	log.roll.hours = 168
+	log.cleanup.policy = delete
+	host.name = 
+	log.roll.jitter.ms = null
+	max.connections.per.ip = 2147483647
+	offsets.topic.segment.bytes = 104857600
+	background.threads = 10
+	quota.consumer.default = 9223372036854775807
+	request.timeout.ms = 30000
+	log.message.format.version = 0.10.0-IV1
+	log.index.interval.bytes = 4096
+	log.dir = /tmp/kafka-logs
+	log.segment.bytes = 1073741824
+	log.cleaner.backoff.ms = 15000
+	offset.metadata.max.bytes = 4096
+	ssl.truststore.location = null
+	group.max.session.timeout.ms = 300000
+	ssl.keystore.password = null
+	zookeeper.sync.time.ms = 2000
+	port = 9092
+	log.retention.minutes = null
+	log.segment.delete.delay.ms = 60000
+	log.dirs = /home/knoldus/Desktop/Lagom/lagom-cassandra-poc/target/lagom-dynamic-projects/lagom-internal-meta-project-kafka/target/kafka_data
+	controlled.shutdown.enable = true
+	compression.type = producer
+	max.connections.per.ip.overrides = 
+	log.message.timestamp.difference.max.ms = 9223372036854775807
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	log.cleaner.io.max.bytes.per.second = 1.7976931348623157E308
+	auto.leader.rebalance.enable = true
+	leader.imbalance.check.interval.seconds = 300
+	log.cleaner.min.cleanable.ratio = 0.5
+	replica.lag.time.max.ms = 10000
+	num.network.threads = 3
+	ssl.key.password = null
+	reserved.broker.max.id = 1000
+	metrics.num.samples = 2
+	socket.send.buffer.bytes = 102400
+	ssl.protocol = TLS
+	socket.receive.buffer.bytes = 102400
+	ssl.keystore.location = null
+	replica.fetch.min.bytes = 1
+	broker.rack = null
+	unclean.leader.election.enable = true
+	sasl.enabled.mechanisms = [GSSAPI]
+	group.min.session.timeout.ms = 6000
+	log.cleaner.io.buffer.load.factor = 0.9
+	offsets.retention.check.interval.ms = 600000
+	producer.purgatory.purge.interval.requests = 1000
+	metrics.sample.window.ms = 30000
+	broker.id = 0
+	offsets.topic.compression.codec = 0
+	log.retention.check.interval.ms = 300000
+	advertised.listeners = null
+	leader.imbalance.per.broker.percentage = 10
+ (kafka.server.KafkaConfig)
+[2017-07-27 16:33:49,820] INFO Zookeeper data directory is /home/knoldus/Desktop/Lagom/lagom-cassandra-poc/target/lagom-dynamic-projects/lagom-internal-meta-project-kafka/target/zookeeper_data. (com.lightbend.lagom.internal.kafka.KafkaLocalServer)
+[2017-07-27 16:33:49,842] INFO Starting server (org.apache.zookeeper.server.ZooKeeperServerMain)
+[2017-07-27 16:33:49,855] INFO Server environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,855] INFO Server environment:host.name=localhost (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,855] INFO Server environment:java.version=1.8.0_131 (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,855] INFO Server environment:java.vendor=Oracle Corporation (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,856] INFO Server environment:java.home=/usr/lib/jvm/java-8-openjdk-amd64/jre (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,856] INFO Server environment:java.class.path=/home/knoldus/.m2/repository/com/lightbend/lagom/lagom-kafka-server_2.11/1.3.0/lagom-kafka-server_2.11-1.3.0.jar:/home/knoldus/.m2/repository/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.jar:/home/knoldus/.m2/repository/org/apache/kafka/kafka_2.11/0.10.0.1/kafka_2.11-0.10.0.1.jar:/home/knoldus/.m2/repository/com/101tec/zkclient/0.8/zkclient-0.8.jar:/home/knoldus/.m2/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar:/home/knoldus/.m2/repository/org/slf4j/slf4j-log4j12/1.7.21/slf4j-log4j12-1.7.21.jar:/home/knoldus/.m2/repository/com/yammer/metrics/metrics-core/2.2.0/metrics-core-2.2.0.jar:/home/knoldus/.m2/repository/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.4/scala-parser-combinators_2.11-1.0.4.jar:/home/knoldus/.m2/repository/net/sf/jopt-simple/jopt-simple/4.9/jopt-simple-4.9.jar:/home/knoldus/.m2/repository/org/apache/zookeeper/zookeeper/3.4.6/zookeeper-3.4.6.jar:/home/knoldus/.m2/repository/jline/jline/0.9.94/jline-0.9.94.jar:/home/knoldus/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/home/knoldus/.m2/repository/io/netty/netty/3.7.0.Final/netty-3.7.0.Final.jar:/home/knoldus/.m2/repository/org/apache/kafka/kafka-clients/0.10.0.1/kafka-clients-0.10.0.1.jar:/home/knoldus/.m2/repository/net/jpountz/lz4/lz4/1.3.0/lz4-1.3.0.jar:/home/knoldus/.m2/repository/org/xerial/snappy/snappy-java/1.1.2.6/snappy-java-1.1.2.6.jar:/home/knoldus/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar:/home/knoldus/.m2/repository/org/apache/curator/curator-framework/2.10.0/curator-framework-2.10.0.jar:/home/knoldus/.m2/repository/org/apache/curator/curator-client/2.10.0/curator-client-2.10.0.jar:/home/knoldus/.m2/repository/org/apache/curator/curator-test/2.10.0/curator-test-2.10.0.jar:/home/knoldus/.m2/repository/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar:/home/knoldus/.m2/repository/org/apache/commons/commons-math/2.2/commons-math-2.2.jar:/home/knoldus/.m2/repository/com/google/guava/guava/16.0.1/guava-16.0.1.jar:/home/knoldus/.m2/repository/org/scala-lang/modules/scala-java8-compat_2.11/0.7.0/scala-java8-compat_2.11-0.7.0.jar (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,856] INFO Server environment:java.library.path=/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,856] INFO Server environment:java.io.tmpdir=/tmp (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,856] INFO Server environment:java.compiler=<NA> (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,856] INFO Server environment:os.name=Linux (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,856] INFO Server environment:os.arch=amd64 (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,856] INFO Server environment:os.version=4.4.0-79-generic (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,856] INFO Server environment:user.name=knoldus (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,856] INFO Server environment:user.home=/home/knoldus (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,856] INFO Server environment:user.dir=/home/knoldus/Desktop/Lagom/lagom-cassandra-poc (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,874] INFO tickTime set to 3000 (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,874] INFO minSessionTimeout set to -1 (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,874] INFO maxSessionTimeout set to -1 (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:49,900] INFO binding to port 0.0.0.0/0.0.0.0:2181 (org.apache.zookeeper.server.NIOServerCnxnFactory)
+[2017-07-27 16:33:50,967] INFO starting (kafka.server.KafkaServer)
+[2017-07-27 16:33:50,976] INFO Connecting to zookeeper on localhost:2181 (kafka.server.KafkaServer)
+[2017-07-27 16:33:51,006] INFO Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,009] INFO Client environment:host.name=localhost (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,009] INFO Client environment:java.version=1.8.0_131 (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,010] INFO Client environment:java.vendor=Oracle Corporation (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,010] INFO Client environment:java.home=/usr/lib/jvm/java-8-openjdk-amd64/jre (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,010] INFO Client environment:java.class.path=/home/knoldus/.m2/repository/com/lightbend/lagom/lagom-kafka-server_2.11/1.3.0/lagom-kafka-server_2.11-1.3.0.jar:/home/knoldus/.m2/repository/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.jar:/home/knoldus/.m2/repository/org/apache/kafka/kafka_2.11/0.10.0.1/kafka_2.11-0.10.0.1.jar:/home/knoldus/.m2/repository/com/101tec/zkclient/0.8/zkclient-0.8.jar:/home/knoldus/.m2/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar:/home/knoldus/.m2/repository/org/slf4j/slf4j-log4j12/1.7.21/slf4j-log4j12-1.7.21.jar:/home/knoldus/.m2/repository/com/yammer/metrics/metrics-core/2.2.0/metrics-core-2.2.0.jar:/home/knoldus/.m2/repository/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.4/scala-parser-combinators_2.11-1.0.4.jar:/home/knoldus/.m2/repository/net/sf/jopt-simple/jopt-simple/4.9/jopt-simple-4.9.jar:/home/knoldus/.m2/repository/org/apache/zookeeper/zookeeper/3.4.6/zookeeper-3.4.6.jar:/home/knoldus/.m2/repository/jline/jline/0.9.94/jline-0.9.94.jar:/home/knoldus/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/home/knoldus/.m2/repository/io/netty/netty/3.7.0.Final/netty-3.7.0.Final.jar:/home/knoldus/.m2/repository/org/apache/kafka/kafka-clients/0.10.0.1/kafka-clients-0.10.0.1.jar:/home/knoldus/.m2/repository/net/jpountz/lz4/lz4/1.3.0/lz4-1.3.0.jar:/home/knoldus/.m2/repository/org/xerial/snappy/snappy-java/1.1.2.6/snappy-java-1.1.2.6.jar:/home/knoldus/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar:/home/knoldus/.m2/repository/org/apache/curator/curator-framework/2.10.0/curator-framework-2.10.0.jar:/home/knoldus/.m2/repository/org/apache/curator/curator-client/2.10.0/curator-client-2.10.0.jar:/home/knoldus/.m2/repository/org/apache/curator/curator-test/2.10.0/curator-test-2.10.0.jar:/home/knoldus/.m2/repository/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar:/home/knoldus/.m2/repository/org/apache/commons/commons-math/2.2/commons-math-2.2.jar:/home/knoldus/.m2/repository/com/google/guava/guava/16.0.1/guava-16.0.1.jar:/home/knoldus/.m2/repository/org/scala-lang/modules/scala-java8-compat_2.11/0.7.0/scala-java8-compat_2.11-0.7.0.jar (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,010] INFO Client environment:java.library.path=/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,010] INFO Client environment:java.io.tmpdir=/tmp (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,010] INFO Client environment:java.compiler=<NA> (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,010] INFO Client environment:os.name=Linux (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,010] INFO Client environment:os.arch=amd64 (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,010] INFO Client environment:os.version=4.4.0-79-generic (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,010] INFO Client environment:user.name=knoldus (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,010] INFO Client environment:user.home=/home/knoldus (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,010] INFO Client environment:user.dir=/home/knoldus/Desktop/Lagom/lagom-cassandra-poc (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,011] INFO Initiating client connection, connectString=localhost:2181 sessionTimeout=6000 watcher=org.I0Itec.zkclient.ZkClient@77847718 (org.apache.zookeeper.ZooKeeper)
+[2017-07-27 16:33:51,017] INFO Starting ZkClient event thread. (org.I0Itec.zkclient.ZkEventThread)
+[2017-07-27 16:33:51,027] INFO Waiting for keeper state SyncConnected (org.I0Itec.zkclient.ZkClient)
+[2017-07-27 16:33:51,037] INFO Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error) (org.apache.zookeeper.ClientCnxn)
+[2017-07-27 16:33:51,062] INFO Accepted socket connection from /127.0.0.1:50972 (org.apache.zookeeper.server.NIOServerCnxnFactory)
+[2017-07-27 16:33:51,067] INFO Socket connection established to localhost/127.0.0.1:2181, initiating session (org.apache.zookeeper.ClientCnxn)
+[2017-07-27 16:33:51,072] INFO Client attempting to establish new session at /127.0.0.1:50972 (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:51,076] INFO Creating new log file: log.1 (org.apache.zookeeper.server.persistence.FileTxnLog)
+[2017-07-27 16:33:51,138] INFO Established session 0x15d83b789b40000 with negotiated timeout 6000 for client /127.0.0.1:50972 (org.apache.zookeeper.server.ZooKeeperServer)
+[2017-07-27 16:33:51,138] INFO Session establishment complete on server localhost/127.0.0.1:2181, sessionid = 0x15d83b789b40000, negotiated timeout = 6000 (org.apache.zookeeper.ClientCnxn)
+[2017-07-27 16:33:51,140] INFO zookeeper state changed (SyncConnected) (org.I0Itec.zkclient.ZkClient)
+[2017-07-27 16:33:51,180] INFO Got user-level KeeperException when processing sessionid:0x15d83b789b40000 type:create cxid:0x5 zxid:0x3 txntype:-1 reqpath:n/a Error Path:/brokers Error:KeeperErrorCode = NoNode for /brokers (org.apache.zookeeper.server.PrepRequestProcessor)
+[2017-07-27 16:33:51,214] INFO Got user-level KeeperException when processing sessionid:0x15d83b789b40000 type:create cxid:0xb zxid:0x7 txntype:-1 reqpath:n/a Error Path:/config Error:KeeperErrorCode = NoNode for /config (org.apache.zookeeper.server.PrepRequestProcessor)
+[2017-07-27 16:33:51,253] INFO Got user-level KeeperException when processing sessionid:0x15d83b789b40000 type:create cxid:0x13 zxid:0xc txntype:-1 reqpath:n/a Error Path:/admin Error:KeeperErrorCode = NoNode for /admin (org.apache.zookeeper.server.PrepRequestProcessor)
+[2017-07-27 16:33:51,322] INFO Log directory '/home/knoldus/Desktop/Lagom/lagom-cassandra-poc/target/lagom-dynamic-projects/lagom-internal-meta-project-kafka/target/kafka_data' not found, creating it. (kafka.log.LogManager)
+[2017-07-27 16:33:51,345] INFO Loading logs. (kafka.log.LogManager)
+[2017-07-27 16:33:51,354] INFO Logs loading complete. (kafka.log.LogManager)
+[2017-07-27 16:33:51,430] INFO Starting log cleanup with a period of 300000 ms. (kafka.log.LogManager)
+[2017-07-27 16:33:51,432] INFO Starting log flusher with a default period of 9223372036854775807 ms. (kafka.log.LogManager)
+[2017-07-27 16:33:51,438] WARN No meta.properties file under dir /home/knoldus/Desktop/Lagom/lagom-cassandra-poc/target/lagom-dynamic-projects/lagom-internal-meta-project-kafka/target/kafka_data/meta.properties (kafka.server.BrokerMetadataCheckpoint)
+[2017-07-27 16:33:51,509] INFO Awaiting socket connections on 0.0.0.0:9092. (kafka.network.Acceptor)
+[2017-07-27 16:33:51,518] INFO [Socket Server on Broker 0], Started 1 acceptor threads (kafka.network.SocketServer)
+[2017-07-27 16:33:51,540] INFO [ExpirationReaper-0], Starting  (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2017-07-27 16:33:51,543] INFO [ExpirationReaper-0], Starting  (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2017-07-27 16:33:51,610] INFO Creating /controller (is it secure? false) (kafka.utils.ZKCheckedEphemeral)
+[2017-07-27 16:33:51,617] INFO Result of znode creation is: OK (kafka.utils.ZKCheckedEphemeral)
+[2017-07-27 16:33:51,617] INFO 0 successfully elected as leader (kafka.server.ZookeeperLeaderElector)
+[2017-07-27 16:33:51,620] INFO Got user-level KeeperException when processing sessionid:0x15d83b789b40000 type:setData cxid:0x21 zxid:0x12 txntype:-1 reqpath:n/a Error Path:/controller_epoch Error:KeeperErrorCode = NoNode for /controller_epoch (org.apache.zookeeper.server.PrepRequestProcessor)
+[2017-07-27 16:33:51,713] INFO Got user-level KeeperException when processing sessionid:0x15d83b789b40000 type:delete cxid:0x30 zxid:0x14 txntype:-1 reqpath:n/a Error Path:/admin/preferred_replica_election Error:KeeperErrorCode = NoNode for /admin/preferred_replica_election (org.apache.zookeeper.server.PrepRequestProcessor)
+[2017-07-27 16:33:51,740] INFO [ExpirationReaper-0], Starting  (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2017-07-27 16:33:51,743] INFO [ExpirationReaper-0], Starting  (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2017-07-27 16:33:51,753] INFO [GroupCoordinator 0]: Starting up. (kafka.coordinator.GroupCoordinator)
+[2017-07-27 16:33:51,754] INFO [GroupCoordinator 0]: Startup complete. (kafka.coordinator.GroupCoordinator)
+[2017-07-27 16:33:51,773] INFO [Group Metadata Manager on Broker 0]: Removed 0 expired offsets in 16 milliseconds. (kafka.coordinator.GroupMetadataManager)
+[2017-07-27 16:33:51,775] INFO [ThrottledRequestReaper-Produce], Starting  (kafka.server.ClientQuotaManager$ThrottledRequestReaper)
+[2017-07-27 16:33:51,778] INFO [ThrottledRequestReaper-Fetch], Starting  (kafka.server.ClientQuotaManager$ThrottledRequestReaper)
+[2017-07-27 16:33:51,781] INFO Will not load MX4J, mx4j-tools.jar is not in the classpath (kafka.utils.Mx4jLoader$)
+[2017-07-27 16:33:51,814] INFO Creating /brokers/ids/0 (is it secure? false) (kafka.utils.ZKCheckedEphemeral)
+[2017-07-27 16:33:51,821] INFO Got user-level KeeperException when processing sessionid:0x15d83b789b40000 type:create cxid:0x37 zxid:0x15 txntype:-1 reqpath:n/a Error Path:/brokers Error:KeeperErrorCode = NodeExists for /brokers (org.apache.zookeeper.server.PrepRequestProcessor)
+[2017-07-27 16:33:51,821] INFO Got user-level KeeperException when processing sessionid:0x15d83b789b40000 type:create cxid:0x38 zxid:0x16 txntype:-1 reqpath:n/a Error Path:/brokers/ids Error:KeeperErrorCode = NodeExists for /brokers/ids (org.apache.zookeeper.server.PrepRequestProcessor)
+[2017-07-27 16:33:51,830] INFO Result of znode creation is: OK (kafka.utils.ZKCheckedEphemeral)
+[2017-07-27 16:33:51,832] INFO Registered broker 0 at path /brokers/ids/0 with addresses: PLAINTEXT -> EndPoint(localhost,9092,PLAINTEXT) (kafka.utils.ZkUtils)
+[2017-07-27 16:33:51,833] WARN No meta.properties file under dir /home/knoldus/Desktop/Lagom/lagom-cassandra-poc/target/lagom-dynamic-projects/lagom-internal-meta-project-kafka/target/kafka_data/meta.properties (kafka.server.BrokerMetadataCheckpoint)
+[2017-07-27 16:33:51,860] INFO New leader is 0 (kafka.server.ZookeeperLeaderElector$LeaderChangeListener)
+[2017-07-27 16:33:51,898] INFO Kafka version : 0.10.0.1 (org.apache.kafka.common.utils.AppInfoParser)
+[2017-07-27 16:33:51,898] INFO Kafka commitId : a7a17cdec9eaa6c5 (org.apache.kafka.common.utils.AppInfoParser)
+[2017-07-27 16:33:51,898] INFO [Kafka Server 0], started (kafka.server.KafkaServer)
