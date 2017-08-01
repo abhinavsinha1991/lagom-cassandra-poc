@@ -1,8 +1,9 @@
 # Add any directories, files, or patterns you don't want to be tracked by version control
 # Directories #
+.idea/
 build/
 bin/
-target/
+target/*
 libs/
 tmp/
 node_modules/

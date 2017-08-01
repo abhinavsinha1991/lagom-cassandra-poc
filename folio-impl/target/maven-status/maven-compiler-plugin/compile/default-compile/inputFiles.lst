@@ -1,8 +1,0 @@
-/home/knoldus/rccl/lagom-cassandra-poc/folio-impl/src/main/java/commands/FolioCommand.java
-/home/knoldus/rccl/lagom-cassandra-poc/folio-impl/src/main/java/states/FolioStates.java
-/home/knoldus/rccl/lagom-cassandra-poc/folio-impl/src/main/java/events/FolioEvent.java
-/home/knoldus/rccl/lagom-cassandra-poc/folio-impl/src/main/java/FolioEntity.java
-/home/knoldus/rccl/lagom-cassandra-poc/folio-impl/src/main/java/FolioModule.java
-/home/knoldus/rccl/lagom-cassandra-poc/folio-impl/src/main/java/FolioServiceImpl.java
-/home/knoldus/rccl/lagom-cassandra-poc/folio-impl/src/main/java/events/FolioEventTag.java
-/home/knoldus/rccl/lagom-cassandra-poc/folio-impl/src/main/java/events/FolioEventProcessor.java
