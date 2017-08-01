@@ -42,10 +42,15 @@ public class FolioServiceImpl implements FolioService {
                             shipCode.get(),sailDate.get(),bookingId.get(),paxId.get())
                             .thenApply(rows ->
                                     rows.stream()
-                                            .map(row -> Folio.builder().shipCode(row.getString("shipCode"))
-                                                    .sailDate(row.getString("sailDate")).bookingId(row.getString("bookingId"))
-                                                    .paxId(row.get("paxId",Integer.class))
-                                                    .folioTransaction(row.getString("folioTransaction"))
+                                            .map(row -> Folio.builder().shipCode(row.getString("Ship_Code"))
+                                                    .sailDate(row.getString("Sail_Date")).bookingId(row.getString("Booking_ID"))
+                                                    .paxId(row.get("Payer_PaxID",Integer.class)).transactionId(row.getString("Transaction_ID"))
+                                                    .recordType(row.getString("Record_Type")).payerFolioNumber(row.getString("Payer_FolioNumber"))
+                                                    .buyerFolioNumber(row.getString("Buyer_FolioNumber")).buyerPaxId(row.getString("Buyer_PaxID"))
+                                                    .checkNumber(row.getString("Check_Number")).transactionAmount(row.getDouble("Transaction_Amount"))
+                                                    .transactionDateTime(row.getString("Transaction_DateTime")).transactionDescription(row.getString("Transaction_Description"))
+                                                    .transactionType(row.getString("Transaction_Type")).departmentId(row.getString("Department_ID"))
+                                                    .sourceRecordTimeStamp(row.getString("Source_Record_TimeStamp"))
                                                     .build()
                                             )
                                             .findFirst()
@@ -95,7 +100,7 @@ public class FolioServiceImpl implements FolioService {
 
     private PersistentEntityRef<FolioCommand> folioEntityRef(Folio folio) {
         LOGGER.info(" folioEntityRef method ... ");
-        return persistentEntityRegistry.refFor(FolioEntity.class, folio.getBookingId());
+        return persistentEntityRegistry.refFor(FolioEntity.class, folio.getShipCode() + folio.getSailDate() + folio.getBookingId() + folio.getPaxId());
     }
 }
 

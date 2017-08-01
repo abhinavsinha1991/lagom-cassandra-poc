@@ -17,5 +17,18 @@ public final class Folio {
     String sailDate;
     String bookingId;
     Integer paxId;
-    String folioTransaction;
+//    String folioTransaction;
+   String transactionId;
+   String recordType;
+   String payerFolioNumber;
+   String buyerFolioNumber;
+   String buyerPaxId;
+   String checkNumber;
+   Double transactionAmount;
+   String transactionDateTime;
+   String transactionDescription;
+   String transactionType;
+   String departmentId;
+   String departmentDescription;
+   String sourceRecordTimeStamp;
 }
