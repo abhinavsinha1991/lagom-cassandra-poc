@@ -31,17 +31,17 @@ Rawdata(json):
     }
 
 
-#### 2. Update Movie:
+#### 2. Update Folio:
 
 Route(Method - PUT) : `localhost:9000/api/update-folio/:shipCode?sailDate&bookingId&paxId`
     
 
-#### 3. Delete Movie:
+#### 3. Delete Folio:
 
 Route(Method - DELETE) : `localhost:9000/api/delete-folio/:shipCode?sailDate&bookingId&paxId`
     
 
-#### 4. Get Movie details:
+#### 4. Get Folio details:
 
 Route(Method - GET) : `localhost:9000/api/folio/:shipCode?sailDate&bookingId&paxId`
 
