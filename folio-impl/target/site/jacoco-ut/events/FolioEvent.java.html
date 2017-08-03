@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>FolioEvent.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">folio-impl</a> &gt; <a href="index.source.html" class="el_package">events</a> &gt; <span class="el_source">FolioEvent.java</span></div><h1>FolioEvent.java</h1><pre class="source lang-java linenums">package events;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.knoldus.Folio;
+import com.lightbend.lagom.javadsl.persistence.AggregateEvent;
+import com.lightbend.lagom.javadsl.persistence.AggregateEventTagger;
+import com.lightbend.lagom.serialization.CompressedJsonable;
+import com.lightbend.lagom.serialization.Jsonable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Value;
+
+/**
+ * Created by knoldus on 30/1/17.
+ */
+public interface FolioEvent extends Jsonable, AggregateEvent&lt;FolioEvent&gt; {
+
+    @Override
+    default AggregateEventTagger&lt;FolioEvent&gt; aggregateTag() {
+<span class="fc" id="L20">        return FolioEventTag.INSTANCE;</span>
+    }
+
+<span class="pc bpc" id="L23" title="14 of 20 branches missed.">    @Value</span>
+<span class="pc" id="L24">    @Builder</span>
+    @JsonDeserialize
+<span class="fc" id="L26">    @AllArgsConstructor</span>
+    final class FolioCreated implements FolioEvent, CompressedJsonable {
+<span class="fc" id="L28">        Folio folio;</span>
+<span class="fc" id="L29">        String entityId;</span>
+    }
+
+<span class="pc bpc" id="L32" title="14 of 20 branches missed.">    @Value</span>
+<span class="pc" id="L33">    @Builder</span>
+    @JsonDeserialize
+<span class="fc" id="L35">    @AllArgsConstructor</span>
+    final class FolioUpdated implements FolioEvent, CompressedJsonable {
+<span class="fc" id="L37">        Folio folio;</span>
+<span class="fc" id="L38">        String entityId;</span>
+    }
+
+<span class="pc bpc" id="L41" title="14 of 20 branches missed.">    @Value</span>
+<span class="pc" id="L42">    @Builder</span>
+    @JsonDeserialize
+<span class="fc" id="L44">    @AllArgsConstructor</span>
+    final class FolioDeleted implements FolioEvent, CompressedJsonable {
+<span class="fc" id="L46">        Folio folio;</span>
+<span class="fc" id="L47">        String entityId;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

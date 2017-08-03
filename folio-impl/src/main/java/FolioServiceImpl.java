@@ -1,8 +1,10 @@
 import akka.Done;
 import akka.NotUsed;
+import akka.persistence.query.TimeBasedUUID;
 import com.knoldus.Folio;
 import com.knoldus.FolioService;
 import com.lightbend.lagom.javadsl.api.ServiceCall;
+import com.lightbend.lagom.javadsl.persistence.Offset;
 import com.lightbend.lagom.javadsl.persistence.PersistentEntityRef;
 import com.lightbend.lagom.javadsl.persistence.PersistentEntityRegistry;
 import com.lightbend.lagom.javadsl.persistence.ReadSide;
@@ -38,19 +40,19 @@ public class FolioServiceImpl implements FolioService {
                                                        Optional<String> sailDate,Optional<String> bookingId,Optional<Integer> paxId ) {
         return request -> {
             CompletionStage<Optional<Folio>> folioFuture =
-                    session.selectAll("SELECT * FROM Folios WHERE shipCode = ? AND sailDate = ? AND bookingId = ? AND paxId = ? ",
+                    session.selectAll("SELECT * FROM Folios WHERE Ship_Code = ? AND Sail_Date = ? AND Booking_ID = ? AND Payer_PaxID = ? ",
                             shipCode.get(),sailDate.get(),bookingId.get(),paxId.get())
                             .thenApply(rows ->
                                     rows.stream()
                                             .map(row -> Folio.builder().shipCode(row.getString("Ship_Code"))
                                                     .sailDate(row.getString("Sail_Date")).bookingId(row.getString("Booking_ID"))
-                                                    .paxId(row.get("Payer_PaxID",Integer.class)).transactionId(row.getString("Transaction_ID"))
+                                                    .paxId(row.get("Payer_PaxID",Integer.class)).transactionId((row.get("Transaction_ID", TimeBasedUUID.class).toString()))
                                                     .recordType(row.getString("Record_Type")).payerFolioNumber(row.getString("Payer_FolioNumber"))
                                                     .buyerFolioNumber(row.getString("Buyer_FolioNumber")).buyerPaxId(row.getString("Buyer_PaxID"))
                                                     .checkNumber(row.getString("Check_Number")).transactionAmount(row.getDouble("Transaction_Amount"))
-                                                    .transactionDateTime(row.getString("Transaction_DateTime")).transactionDescription(row.getString("Transaction_Description"))
+                                                    .transactionDateTime(row.getTimestamp("Transaction_DateTime").toString()).transactionDescription(row.getString("Transaction_Description"))
                                                     .transactionType(row.getString("Transaction_Type")).departmentId(row.getString("Department_ID"))
-                                                    .sourceRecordTimeStamp(row.getString("Source_Record_TimeStamp"))
+                                                    .sourceRecordTimeStamp(row.getTimestamp("Source_Record_TimeStamp").toString())
                                                     .build()
                                             )
                                             .findFirst()
