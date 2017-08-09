@@ -42,7 +42,7 @@
             <groupId>com.typesafe.conductr</groupId>
             <artifactId>${conductr.lib.name}</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.lightbend.lagom/lagom-javadsl-jackson_2.11 -->
+         <!--https://mvnrepository.com/artifact/com.lightbend.lagom/lagom-javadsl-jackson_2.11 -->
         <dependency>
             <groupId>com.lightbend.lagom</groupId>
             <artifactId>lagom-javadsl-jackson_2.11</artifactId>
@@ -83,9 +83,9 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <goals>
-                            <goal>renameConductRBundle</goal>
-                        </goals>
+                        <!--<goals>-->
+                            <!--<goal>renameConductRBundle</goal>-->
+                        <!--</goals>-->
                     </execution>
                 </executions>
             </plugin>

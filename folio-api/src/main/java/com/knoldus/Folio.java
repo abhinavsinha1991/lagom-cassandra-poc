@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Value;
 
 import javax.annotation.concurrent.Immutable;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.UUID;
 
 @Value
 @Builder
@@ -18,17 +21,17 @@ public final class Folio {
     String bookingId;
     Integer paxId;
 //    String folioTransaction;
-   String transactionId;
+   UUID transactionId;
    String recordType;
    String payerFolioNumber;
    String buyerFolioNumber;
    String buyerPaxId;
    String checkNumber;
-   Double transactionAmount;
-   String transactionDateTime;
+   BigDecimal transactionAmount;
+   Date transactionDateTime;
    String transactionDescription;
    String transactionType;
    String departmentId;
    String departmentDescription;
-   String sourceRecordTimeStamp;
+   Date sourceRecordTimeStamp;
 }

@@ -3,6 +3,7 @@ package events;
 import akka.Done;
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.PreparedStatement;
+import com.datastax.driver.core.utils.UUIDs;
 import com.lightbend.lagom.javadsl.persistence.AggregateEventTag;
 import com.lightbend.lagom.javadsl.persistence.ReadSideProcessor;
 import com.lightbend.lagom.javadsl.persistence.cassandra.CassandraReadSide;
@@ -15,10 +16,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.CompletionStage;
 
 
@@ -81,7 +81,7 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
         return session.prepare(
                 "INSERT INTO Folios (Ship_Code, Sail_Date, Booking_ID, Payer_PaxID, Transaction_ID, Record_type, Payer_FolioNumber, Buyer_FolioNumber, Buyer_PaxID," +
                         "Check_Number, Transaction_Amount, Transaction_DateTime, Transaction_Description,"+
-                        "Transaction_Type, Department_ID, Department_Description, Source_Record_TimeStamp) VALUES (?, ?, ?, ?,now(), ?,?,?,?,?,?,dateOf(now()),?,?,?,?,dateOf(now()))"
+                        "Transaction_Type, Department_ID, Department_Description, Source_Record_TimeStamp) VALUES (?, ?, ?, ?, now(), ?,?,?,?,?,?,dateOf(now()),?,?,?,?,dateOf(now()))"
 
         ).thenApply(ps -> {
             setWriteFolios(ps);
@@ -100,13 +100,31 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
         bindWriteFolio.setString("Ship_Code", event.getFolio().getShipCode());
         bindWriteFolio.setString("Sail_Date", event.getFolio().getSailDate());
         bindWriteFolio.setString("Booking_ID", event.getFolio().getBookingId());
+        LOGGER.info(event.getFolio().getBookingId()+".........>>>>>\n\n\n\n\n");
+
         bindWriteFolio.setInt("Payer_PaxID", event.getFolio().getPaxId());
+
+        LOGGER.info(event.getFolio().getPaxId()+".........>>>>>\n\n\n\n\n");
+//        UUID uid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+
+        // checking time stamp value
+        LOGGER.info(">>>>>><<<<<<<<<<"+ UUIDs.timeBased());
+//        LOGGER.info(".............."+uid.timestamp());
+//        bindWriteFolio.setUUID("Transaction_ID", UUIDs.timeBased());
+
         bindWriteFolio.setString("Record_Type", event.getFolio().getRecordType());
+        LOGGER.info(event.getFolio().getRecordType()+".........>>>>>\n\n\n\n\n");
         bindWriteFolio.setString("Payer_FolioNumber", event.getFolio().getPayerFolioNumber());
+        LOGGER.info(event.getFolio().getPayerFolioNumber()+".........>>>>>\n\n\n\n\n");
         bindWriteFolio.setString("Buyer_FolioNumber", event.getFolio().getBuyerFolioNumber());
+        LOGGER.info(event.getFolio().getBuyerFolioNumber()+".........>>>>>\n\n\n\n\n");
         bindWriteFolio.setString("Buyer_PaxID", event.getFolio().getBuyerPaxId());
         bindWriteFolio.setString("Check_Number", event.getFolio().getCheckNumber());
-        bindWriteFolio.setDecimal("Transaction_Amount", BigDecimal.valueOf(event.getFolio().getTransactionAmount()));
+        LOGGER.info(event.getFolio().getCheckNumber()+"\n\n\n\n\n.........<<<<>>>>>");
+
+        LOGGER.info(event.getFolio().getTransactionAmount()+".........>>>>>\n\n\n\n\n");
+        bindWriteFolio.setDecimal("Transaction_Amount", (event.getFolio().getTransactionAmount()));
+
         /*bindWriteFolio.setString("Transaction_DateTime", event.getFolio().getTransactionDateTime());*/
         bindWriteFolio.setString("Transaction_Description", event.getFolio().getTransactionDescription());
         bindWriteFolio.setString("Transaction_Type", event.getFolio().getTransactionType());
@@ -137,7 +155,7 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
         bindWriteFolio.setString("Buyer_FolioNumber", event.getFolio().getBuyerFolioNumber());
         bindWriteFolio.setString("Buyer_PaxID", event.getFolio().getBuyerPaxId());
         bindWriteFolio.setString("Check_Number", event.getFolio().getCheckNumber());
-        bindWriteFolio.setDecimal("Transaction_Amount", BigDecimal.valueOf(event.getFolio().getTransactionAmount()));
+        bindWriteFolio.setDecimal("Transaction_Amount", event.getFolio().getTransactionAmount());
         /*bindWriteFolio.setString("Transaction_DateTime", event.getFolio().getTransactionDateTime());*/
         bindWriteFolio.setString("Transaction_Description", event.getFolio().getTransactionDescription());
         bindWriteFolio.setString("Transaction_Type", event.getFolio().getTransactionType());
