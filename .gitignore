@@ -18,6 +18,7 @@ node_modules/
 *.war
 *.ear
 *.db
+*.zip
 rebel.xml
 
 ######################
