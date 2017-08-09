@@ -15,10 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.CompletionStage;
 
 
@@ -64,10 +62,11 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
         LOGGER.info(" createTable method ... ");
         return session.executeCreateTable(
                 "CREATE TABLE IF NOT EXISTS Folios ( " +
-                        "Ship_Code TEXT, Sail_Date TEXT, Booking_ID TEXT , Payer_PaxID INT ," +
-                        "Transaction_ID TIMEUUID, Record_Type TEXT, Payer_FolioNumber TEXT, Buyer_FolioNumber TEXT, Buyer_PaxID TEXT ,"+
-                        "Check_Number TEXT, Transaction_Amount DECIMAL, Transaction_DateTime TIMESTAMP, Transaction_Description TEXT,"+
-                        "Transaction_Type TEXT, Department_ID TEXT, Department_Description TEXT,  Source_Record_TimeStamp TIMESTAMP, PRIMARY KEY((Ship_Code,Sail_Date),Booking_ID,Payer_PaxID))"
+                        "Ship_Code TEXT, Sail_Date TEXT, Payer_PaxID INT , Booking_ID TEXT ," +
+                        "Charge_ID INT, Buyer_PaxID Int, Payer_FolioNumber TEXT, Buyer_FolioNumber TEXT,"+
+                        "Item_ID Int, Check_Number TEXT, Transaction_Amount DECIMAL, Transaction_DateTime TIMESTAMP, Transaction_Description TEXT,"+
+                        "Charge_Type TEXT, Department_ID TEXT, Department_Description TEXT,  Source_Record_TimeStamp TIMESTAMP, " +
+                        "PRIMARY KEY((Ship_Code,Sail_Date), Payer_PaxID, Charge_ID))"
         );
     }
 
@@ -79,9 +78,10 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
     private CompletionStage<Done> prepareWriteFolio() {
         LOGGER.info(" prepareWriteFolio method ... ");
         return session.prepare(
-                "INSERT INTO Folios (Ship_Code, Sail_Date, Booking_ID, Payer_PaxID, Transaction_ID, Record_type, Payer_FolioNumber, Buyer_FolioNumber, Buyer_PaxID," +
-                        "Check_Number, Transaction_Amount, Transaction_DateTime, Transaction_Description,"+
-                        "Transaction_Type, Department_ID, Department_Description, Source_Record_TimeStamp) VALUES (?, ?, ?, ?, now(), ?,?,?,?,?,?,dateOf(now()),?,?,?,?,dateOf(now()))"
+                "INSERT INTO Folios (Ship_Code, Sail_Date, Payer_PaxID, Booking_ID, Charge_ID, Buyer_PaxID, Payer_FolioNumber, Buyer_FolioNumber,"+
+                        "Item_ID, Check_Number, Transaction_Amount, Transaction_DateTime, Transaction_Description,"+
+                        "Charge_Type, Department_ID, Department_Description, Source_Record_TimeStamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,dateOf(now())," +
+                        " ?, ?, ?, ?, dateOf(now()))"
 
         ).thenApply(ps -> {
             setWriteFolios(ps);
@@ -99,37 +99,39 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
         BoundStatement bindWriteFolio = writeFolios.bind();
         bindWriteFolio.setString("Ship_Code", event.getFolio().getShipCode());
         bindWriteFolio.setString("Sail_Date", event.getFolio().getSailDate());
+        bindWriteFolio.setInt("Payer_PaxID", event.getFolio().getPayerPaxId());
         bindWriteFolio.setString("Booking_ID", event.getFolio().getBookingId());
-        LOGGER.info(event.getFolio().getBookingId()+".........>>>>>\n\n\n\n\n");
+//        LOGGER.info(event.getFolio().getBookingId()+".........>>>>>\n\n\n\n\n");
+        bindWriteFolio.setInt("Charge_ID", event.getFolio().getChargeId());
+        bindWriteFolio.setInt("Buyer_PaxID", event.getFolio().getBuyerPaxId());
+        bindWriteFolio.setString("Payer_FolioNumber", event.getFolio().getPayerFolioNumber());
+        bindWriteFolio.setString("Buyer_FolioNumber", event.getFolio().getBuyerFolioNumber());
+        bindWriteFolio.setInt("Item_ID", event.getFolio().getItemId());
+        bindWriteFolio.setString("Check_Number", event.getFolio().getCheckNumber());
+        bindWriteFolio.setDecimal("Transaction_Amount", (event.getFolio().getTransactionAmount()));
+        bindWriteFolio.setString("Transaction_Description", event.getFolio().getTransactionDescription());
+        bindWriteFolio.setString("Charge_Type", event.getFolio().getChargeType());
+        bindWriteFolio.setString("Department_ID", event.getFolio().getDepartmentId());
+        bindWriteFolio.setString("Department_Description", event.getFolio().getDepartmentDescription());
 
-        bindWriteFolio.setInt("Payer_PaxID", event.getFolio().getPaxId());
-
-        LOGGER.info(event.getFolio().getPaxId()+".........>>>>>\n\n\n\n\n");
+//        LOGGER.info(event.getFolio().getPayerPaxId()+".........>>>>>\n\n\n\n\n");
 //        UUID uid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
 
         // checking time stamp value
-        LOGGER.info(">>>>>><<<<<<<<<<"+ UUIDs.timeBased());
+//        LOGGER.info(">>>>>><<<<<<<<<<"+ UUIDs.timeBased());
 //        LOGGER.info(".............."+uid.timestamp());
 //        bindWriteFolio.setUUID("Transaction_ID", UUIDs.timeBased());
 
-        bindWriteFolio.setString("Record_Type", event.getFolio().getRecordType());
-        LOGGER.info(event.getFolio().getRecordType()+".........>>>>>\n\n\n\n\n");
-        bindWriteFolio.setString("Payer_FolioNumber", event.getFolio().getPayerFolioNumber());
-        LOGGER.info(event.getFolio().getPayerFolioNumber()+".........>>>>>\n\n\n\n\n");
-        bindWriteFolio.setString("Buyer_FolioNumber", event.getFolio().getBuyerFolioNumber());
-        LOGGER.info(event.getFolio().getBuyerFolioNumber()+".........>>>>>\n\n\n\n\n");
-        bindWriteFolio.setString("Buyer_PaxID", event.getFolio().getBuyerPaxId());
-        bindWriteFolio.setString("Check_Number", event.getFolio().getCheckNumber());
-        LOGGER.info(event.getFolio().getCheckNumber()+"\n\n\n\n\n.........<<<<>>>>>");
-
-        LOGGER.info(event.getFolio().getTransactionAmount()+".........>>>>>\n\n\n\n\n");
-        bindWriteFolio.setDecimal("Transaction_Amount", (event.getFolio().getTransactionAmount()));
+//        bindWriteFolio.setString("Record_Type", event.getFolio().getRecordType());
+//        LOGGER.info(event.getFolio().getRecordType()+".........>>>>>\n\n\n\n\n");
+//        LOGGER.info(event.getFolio().getPayerFolioNumber()+".........>>>>>\n\n\n\n\n");
+//        LOGGER.info(event.getFolio().getBuyerFolioNumber()+".........>>>>>\n\n\n\n\n");
+//        LOGGER.info(event.getFolio().getCheckNumber()+"\n\n\n\n\n.........<<<<>>>>>");
+//
+//        LOGGER.info(event.getFolio().getTransactionAmount()+".........>>>>>\n\n\n\n\n");
 
         /*bindWriteFolio.setString("Transaction_DateTime", event.getFolio().getTransactionDateTime());*/
-        bindWriteFolio.setString("Transaction_Description", event.getFolio().getTransactionDescription());
-        bindWriteFolio.setString("Transaction_Type", event.getFolio().getTransactionType());
-        bindWriteFolio.setString("Department_ID", event.getFolio().getDepartmentId());
-        bindWriteFolio.setString("Department_Description", event.getFolio().getDepartmentDescription());
+//        bindWriteFolio.setString("Transaction_Type", event.getFolio().getTransactionType());
 
 
         //        bindWriteFolio.setString("folioTransaction", event.getFolio().getFolioTransaction());
@@ -146,21 +148,39 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
         BoundStatement bindWriteFolio = writeFolios.bind();
         bindWriteFolio.setString("Ship_Code", event.getFolio().getShipCode());
         bindWriteFolio.setString("Sail_Date", event.getFolio().getSailDate());
+        bindWriteFolio.setInt("Payer_PaxID", event.getFolio().getPayerPaxId());
         bindWriteFolio.setString("Booking_ID", event.getFolio().getBookingId());
-        bindWriteFolio.setInt("Payer_PaxID", event.getFolio().getPaxId());
-
-//        bindWriteFolio.setUUID("Transaction_ID", UUIDGen.);
-        bindWriteFolio.setString("Record_Type", event.getFolio().getRecordType());
+//        LOGGER.info(event.getFolio().getBookingId()+".........>>>>>\n\n\n\n\n");
+        bindWriteFolio.setInt("Charge_ID", event.getFolio().getChargeId());
+        bindWriteFolio.setInt("Buyer_PaxID", event.getFolio().getBuyerPaxId());
         bindWriteFolio.setString("Payer_FolioNumber", event.getFolio().getPayerFolioNumber());
         bindWriteFolio.setString("Buyer_FolioNumber", event.getFolio().getBuyerFolioNumber());
-        bindWriteFolio.setString("Buyer_PaxID", event.getFolio().getBuyerPaxId());
+        bindWriteFolio.setInt("Item_ID", event.getFolio().getItemId());
         bindWriteFolio.setString("Check_Number", event.getFolio().getCheckNumber());
-        bindWriteFolio.setDecimal("Transaction_Amount", event.getFolio().getTransactionAmount());
-        /*bindWriteFolio.setString("Transaction_DateTime", event.getFolio().getTransactionDateTime());*/
+        bindWriteFolio.setDecimal("Transaction_Amount", (event.getFolio().getTransactionAmount()));
         bindWriteFolio.setString("Transaction_Description", event.getFolio().getTransactionDescription());
-        bindWriteFolio.setString("Transaction_Type", event.getFolio().getTransactionType());
+        bindWriteFolio.setString("Charge_Type", event.getFolio().getChargeType());
         bindWriteFolio.setString("Department_ID", event.getFolio().getDepartmentId());
         bindWriteFolio.setString("Department_Description", event.getFolio().getDepartmentDescription());
+
+
+        //        bindWriteFolio.setString("Ship_Code", event.getFolio().getShipCode());
+//        bindWriteFolio.setString("Sail_Date", event.getFolio().getSailDate());
+//        bindWriteFolio.setString("Booking_ID", event.getFolio().getBookingId());
+//        bindWriteFolio.setInt("Payer_PaxID", event.getFolio().getPayerPaxId());
+//
+////        bindWriteFolio.setUUID("Transaction_ID", UUIDGen.);
+////        bindWriteFolio.setString("Record_Type", event.getFolio().getRecordType());
+//        bindWriteFolio.setString("Payer_FolioNumber", event.getFolio().getPayerFolioNumber());
+//        bindWriteFolio.setString("Buyer_FolioNumber", event.getFolio().getBuyerFolioNumber());
+//        bindWriteFolio.setString("Buyer_PaxID", event.getFolio().getBuyerPaxId());
+//        bindWriteFolio.setString("Check_Number", event.getFolio().getCheckNumber());
+//        bindWriteFolio.setDecimal("Transaction_Amount", event.getFolio().getTransactionAmount());
+//        /*bindWriteFolio.setString("Transaction_DateTime", event.getFolio().getTransactionDateTime());*/
+//        bindWriteFolio.setString("Transaction_Description", event.getFolio().getTransactionDescription());
+//        bindWriteFolio.setString("Transaction_Type", event.getFolio().getTransactionType());
+//        bindWriteFolio.setString("Department_ID", event.getFolio().getDepartmentId());
+//        bindWriteFolio.setString("Department_Description", event.getFolio().getDepartmentDescription());
 
 //        bindWriteFolio.setString("folioTransaction", event.getFolio().getFolioTransaction());
 //        bindWriteFolio.setTimestamp("Source_Record_TimeStamp",Date.valueOf(LocalDateTime.now().toLocalDate()));
@@ -174,7 +194,7 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
 
     private CompletionStage<Done> prepareDeleteFolio() {
         return session.prepare(
-                "DELETE FROM Folios WHERE Ship_Code = ? AND Sail_Date = ? AND Booking_ID = ? AND Payer_PaxID = ? "
+                "DELETE FROM Folios WHERE Ship_Code = ? AND Sail_Date = ? AND Payer_PaxID = ? AND Charge_ID = ?"
         ).thenApply(ps -> {
             setDeleteFolios(ps);
             return Done.getInstance();
@@ -189,8 +209,8 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
         BoundStatement bindWriteFolio = deleteFolios.bind();
         bindWriteFolio.setString("Ship_Code", event.getFolio().getShipCode());
         bindWriteFolio.setString("Sail_Date", event.getFolio().getSailDate());
-        bindWriteFolio.setString("Booking_ID", event.getFolio().getBookingId());
-        bindWriteFolio.setInt("Payer_PaxID", event.getFolio().getPaxId());
+        bindWriteFolio.setInt("Payer_PaxID", event.getFolio().getPayerPaxId());
+        bindWriteFolio.setInt("Charge_ID", event.getFolio().getChargeId());
 
         return CassandraReadSide.completedStatements(Arrays.asList(bindWriteFolio));
     }
