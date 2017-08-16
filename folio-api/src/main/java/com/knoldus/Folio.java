@@ -22,8 +22,6 @@ public final class Folio {
     String bookingId;
      int chargeId;
      int buyerPaxId;
-//   UUID transactionId;
-//   String recordType;
    String payerFolioNumber;
    String buyerFolioNumber;
    int itemId;

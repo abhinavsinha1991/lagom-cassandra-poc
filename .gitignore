@@ -1,6 +1,5 @@
 # Add any directories, files, or patterns you don't want to be tracked by version control
 # Directories #
-#.idea/
 build/
 bin/
 target/
@@ -18,9 +17,7 @@ node_modules/
 *.war
 *.ear
 *.db
-*.zip
 rebel.xml
-
 ######################
 # Windows
 ######################
@@ -44,7 +41,6 @@ Desktop.ini
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
-
 ######################
 # NetBeans
 ######################
@@ -64,7 +60,6 @@ nb-configuration.xml
 *.iws
 .idea/
 atlassian-ide-plugin.xml
-
  
 ######################
 # Eclipse
@@ -81,7 +76,6 @@ local.properties
 .classpath
 .settings/
 .loadpath
-
 # External tool builders
 .externalToolBuilders/
  
@@ -93,11 +87,10 @@ local.properties
  
 # PDT-specific
 .buildpath
-
 # Testing environment specific
 derby.log
 /target/
-
 # Logs directory
 logs/
 /.toDelete
+

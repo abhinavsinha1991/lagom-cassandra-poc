@@ -59,13 +59,7 @@ public class FolioServiceImpl implements FolioService {
                                             )
                                             .findFirst()
                             );
-            /*try {
-                JSONObject json = new JSONObject(folioFuture.toCompletableFuture().get().get());
-                LOGGER.info("The jsonobject is :", json);
-            }
-            catch(Exception e) {
 
-            }*/
             return folioFuture;
         };
     }
