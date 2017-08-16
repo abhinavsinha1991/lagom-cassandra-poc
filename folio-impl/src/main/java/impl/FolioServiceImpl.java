@@ -2,7 +2,6 @@ package impl;
 
 import akka.Done;
 import akka.NotUsed;
-import akka.persistence.query.TimeBasedUUID;
 import com.knoldus.Folio;
 import com.knoldus.FolioService;
 import com.lightbend.lagom.javadsl.api.ServiceCall;
@@ -40,33 +39,27 @@ public class FolioServiceImpl implements FolioService {
 
     @Override
     public ServiceCall<NotUsed, Optional<Folio>> folio(Optional<String> shipCode,
-                                                       Optional<String> sailDate,Optional<String> bookingId,Optional<Integer> paxId ) {
+                                                       Optional<String> sailDate, Optional<Integer> paxId, Optional<Integer> chargeId) {
         return request -> {
             CompletionStage<Optional<Folio>> folioFuture =
-                    session.selectAll("SELECT * FROM Folios WHERE Ship_Code = ? AND Sail_Date = ? AND Booking_ID = ? AND Payer_PaxID = ? ",
-                            shipCode.get(),sailDate.get(),bookingId.get(),paxId.get())
+                    session.selectAll("SELECT * FROM Folios WHERE Ship_Code = ? AND Sail_Date = ? AND Payer_PaxID = ? AND Charge_ID = ?",
+                            shipCode.get(), sailDate.get(), paxId.get(), chargeId.get())
                             .thenApply(rows ->
                                     rows.stream()
                                             .map(row -> Folio.builder().shipCode(row.getString("Ship_Code"))
-                                                    .sailDate(row.getString("Sail_Date")).bookingId(row.getString("Booking_ID"))
-                                                    .paxId(row.get("Payer_PaxID",Integer.class)).transactionId((row.get("Transaction_ID",UUID.class)))
-                                                    .recordType(row.getString("Record_Type")).payerFolioNumber(row.getString("Payer_FolioNumber"))
-                                                    .buyerFolioNumber(row.getString("Buyer_FolioNumber")).buyerPaxId(row.getString("Buyer_PaxID"))
+                                                    .sailDate(row.getString("Sail_Date")).payerPaxId(row.get("Payer_PaxID", Integer.class))
+                                                    .bookingId(row.getString("Booking_ID")).chargeId(row.get("Charge_ID", Integer.class ))
+                                                    .buyerPaxId(row.get("Buyer_PaxID", Integer.class)).payerFolioNumber(row.getString("Payer_FolioNumber"))
+                                                    .buyerFolioNumber(row.getString("Buyer_FolioNumber")).itemId(row.get("Item_ID", Integer.class))
                                                     .checkNumber(row.getString("Check_Number")).transactionAmount(row.getDecimal("Transaction_Amount"))
                                                     .transactionDateTime(row.getTimestamp("Transaction_DateTime")).transactionDescription(row.getString("Transaction_Description"))
-                                                    .transactionType(row.getString("Transaction_Type")).departmentId(row.getString("Department_ID"))
+                                                    .chargeType(row.getString("Charge_Type")).departmentId(row.getString("Department_ID"))
                                                     .sourceRecordTimeStamp(row.getTimestamp("Source_Record_TimeStamp"))
                                                     .build()
                                             )
                                             .findFirst()
                             );
-            /*try {
-                JSONObject json = new JSONObject(folioFuture.toCompletableFuture().get().get());
-                LOGGER.info("The jsonobject is :", json);
-            }
-            catch(Exception e) {
 
-            }*/
             return folioFuture;
         };
     }
@@ -74,7 +67,7 @@ public class FolioServiceImpl implements FolioService {
     @Override
     public ServiceCall<Folio, Done> newFolio() {
         return folio -> {
-            System.out.println("sumit :::::::::::::::::::::::::;inside ");
+//            System.out.println("sumit :::::::::::::::::::::::::;inside ");
             PersistentEntityRef<FolioCommand> ref = folioEntityRef(folio);
             return ref.ask(FolioCommand.CreateFolio.builder().folio(folio).build());
         };
@@ -82,7 +75,7 @@ public class FolioServiceImpl implements FolioService {
 
     @Override
     public ServiceCall<Folio, Done> updateFolio(Optional<String> shipCode,
-                                                Optional<String> sailDate,Optional<String> bookingId,Optional<Integer> paxId ) {
+                                                Optional<String> sailDate, Optional<Integer> payerPaxId, Optional<Integer> chargeId) {
         return folio -> {
             PersistentEntityRef<FolioCommand> ref = folioEntityRef(folio);
             return ref.ask(FolioCommand.UpdateFolio.builder().folio(folio).build());
@@ -91,12 +84,12 @@ public class FolioServiceImpl implements FolioService {
 
     @Override
     public ServiceCall<NotUsed, Done> deleteFolio(Optional<String> shipCode,
-                                                  Optional<String> sailDate,Optional<String> bookingId,Optional<Integer> paxId ) {
+                                                  Optional<String> sailDate, Optional<Integer> payerPaxId, Optional<Integer> chargeId ) {
         return request -> {
             Folio folio = Folio.builder().shipCode(shipCode.isPresent() ? shipCode.get() : "")
                     .sailDate(sailDate.isPresent() ? sailDate.get() : "")
-                    .bookingId(bookingId.isPresent() ? bookingId.get() : "")
-                    .paxId(paxId.isPresent() ? paxId.get() : Integer.getInteger("0"))
+                    .payerPaxId(payerPaxId.isPresent() ? payerPaxId.get() : Integer.getInteger("0"))
+                    .chargeId(chargeId.isPresent() ? chargeId.get() : Integer.getInteger("0"))
                     .build();
             PersistentEntityRef<FolioCommand> ref = folioEntityRef(folio);
             return ref.ask(FolioCommand.DeleteFolio.builder().folio(folio).build());
@@ -105,7 +98,7 @@ public class FolioServiceImpl implements FolioService {
 
     private PersistentEntityRef<FolioCommand> folioEntityRef(Folio folio) {
         LOGGER.info(" folioEntityRef method ... ");
-        return persistentEntityRegistry.refFor(FolioEntity.class, folio.getShipCode() + folio.getSailDate() + folio.getBookingId() + folio.getPaxId());
+        return persistentEntityRegistry.refFor(FolioEntity.class, folio.getShipCode() + folio.getSailDate() + folio.getPayerPaxId() + folio.getChargeId());
     }
 }
 
