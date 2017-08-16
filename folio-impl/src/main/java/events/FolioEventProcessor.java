@@ -3,12 +3,14 @@ package events;
 import akka.Done;
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.PreparedStatement;
-import com.datastax.driver.core.utils.UUIDs;
 import com.lightbend.lagom.javadsl.persistence.AggregateEventTag;
 import com.lightbend.lagom.javadsl.persistence.ReadSideProcessor;
 import com.lightbend.lagom.javadsl.persistence.cassandra.CassandraReadSide;
 import com.lightbend.lagom.javadsl.persistence.cassandra.CassandraSession;
-import events.FolioEvent.*;
+import com.typesafe.config.ConfigFactory;
+import events.FolioEvent.FolioCreated;
+import events.FolioEvent.FolioDeleted;
+import events.FolioEvent.FolioUpdated;
 import org.pcollections.PSequence;
 import org.pcollections.TreePVector;
 import org.slf4j.Logger;
@@ -20,8 +22,13 @@ import java.util.List;
 import java.util.concurrent.CompletionStage;
 
 
-
 public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
+
+    String userName = ConfigFactory.load("application.conf").getString("cassandra-journal.authentication.username");
+    String pass = ConfigFactory.load("application.conf").getString("cassandra-journal.authentication.password");
+
+    String keySpaceName = ConfigFactory.load("application.conf").getString("cassandra-journal.keyspace");
+
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FolioEventProcessor.class);
 
@@ -45,6 +52,9 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
 
     @Override
     public ReadSideHandler<FolioEvent> buildHandler() {
+        LOGGER.info("\n\n\n\n\n"+userName+"\n\n\n\n\n");
+        LOGGER.info("\n\n\n\n\n"+pass+"\n\n\n\n\n");
+
         LOGGER.info(" buildHandler method ... ");
         return readSide.<FolioEvent>builder("Folios_offset")
                 .setGlobalPrepare(this::createTable)
@@ -61,10 +71,10 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
     private CompletionStage<Done> createTable() {
         LOGGER.info(" createTable method ... ");
         return session.executeCreateTable(
-                "CREATE TABLE IF NOT EXISTS Folios ( " +
+                "CREATE TABLE IF NOT EXISTS "+keySpaceName+".Folios ( " +
                         "Ship_Code TEXT, Sail_Date TEXT, Payer_PaxID INT , Booking_ID TEXT ," +
-                        "Charge_ID INT, Buyer_PaxID Int, Payer_FolioNumber TEXT, Buyer_FolioNumber TEXT,"+
-                        "Item_ID Int, Check_Number TEXT, Transaction_Amount DECIMAL, Transaction_DateTime TIMESTAMP, Transaction_Description TEXT,"+
+                        "Charge_ID INT, Buyer_PaxID Int, Payer_FolioNumber TEXT, Buyer_FolioNumber TEXT," +
+                        "Item_ID Int, Check_Number TEXT, Transaction_Amount DECIMAL, Transaction_DateTime TIMESTAMP, Transaction_Description TEXT," +
                         "Charge_Type TEXT, Department_ID TEXT, Department_Description TEXT,  Source_Record_TimeStamp TIMESTAMP, " +
                         "PRIMARY KEY((Ship_Code,Sail_Date), Payer_PaxID, Charge_ID))"
         );
@@ -76,10 +86,11 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
     */
 
     private CompletionStage<Done> prepareWriteFolio() {
+        LOGGER.info("\n\n\n\n\n\n\n"+keySpaceName+"\n\n\n\n\n\n\n");
         LOGGER.info(" prepareWriteFolio method ... ");
         return session.prepare(
-                "INSERT INTO Folios (Ship_Code, Sail_Date, Payer_PaxID, Booking_ID, Charge_ID, Buyer_PaxID, Payer_FolioNumber, Buyer_FolioNumber,"+
-                        "Item_ID, Check_Number, Transaction_Amount, Transaction_DateTime, Transaction_Description,"+
+                "INSERT INTO "+keySpaceName+".Folios (Ship_Code, Sail_Date, Payer_PaxID, Booking_ID, Charge_ID, Buyer_PaxID, Payer_FolioNumber, Buyer_FolioNumber," +
+                        "Item_ID, Check_Number, Transaction_Amount, Transaction_DateTime, Transaction_Description," +
                         "Charge_Type, Department_ID, Department_Description, Source_Record_TimeStamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,dateOf(now())," +
                         " ?, ?, ?, ?, dateOf(now()))"
 
@@ -113,22 +124,6 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
         bindWriteFolio.setString("Charge_Type", event.getFolio().getChargeType());
         bindWriteFolio.setString("Department_ID", event.getFolio().getDepartmentId());
         bindWriteFolio.setString("Department_Description", event.getFolio().getDepartmentDescription());
-
-//        LOGGER.info(event.getFolio().getPayerPaxId()+".........>>>>>\n\n\n\n\n");
-//        UUID uid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
-
-        // checking time stamp value
-//        LOGGER.info(">>>>>><<<<<<<<<<"+ UUIDs.timeBased());
-//        LOGGER.info(".............."+uid.timestamp());
-//        bindWriteFolio.setUUID("Transaction_ID", UUIDs.timeBased());
-
-//        bindWriteFolio.setString("Record_Type", event.getFolio().getRecordType());
-//        LOGGER.info(event.getFolio().getRecordType()+".........>>>>>\n\n\n\n\n");
-//        LOGGER.info(event.getFolio().getPayerFolioNumber()+".........>>>>>\n\n\n\n\n");
-//        LOGGER.info(event.getFolio().getBuyerFolioNumber()+".........>>>>>\n\n\n\n\n");
-//        LOGGER.info(event.getFolio().getCheckNumber()+"\n\n\n\n\n.........<<<<>>>>>");
-//
-//        LOGGER.info(event.getFolio().getTransactionAmount()+".........>>>>>\n\n\n\n\n");
 
         /*bindWriteFolio.setString("Transaction_DateTime", event.getFolio().getTransactionDateTime());*/
 //        bindWriteFolio.setString("Transaction_Type", event.getFolio().getTransactionType());
@@ -194,7 +189,7 @@ public class FolioEventProcessor extends ReadSideProcessor<FolioEvent> {
 
     private CompletionStage<Done> prepareDeleteFolio() {
         return session.prepare(
-                "DELETE FROM Folios WHERE Ship_Code = ? AND Sail_Date = ? AND Payer_PaxID = ? AND Charge_ID = ?"
+                "DELETE FROM "+keySpaceName+".Folios WHERE Ship_Code = ? AND Sail_Date = ? AND Payer_PaxID = ? AND Charge_ID = ?"
         ).thenApply(ps -> {
             setDeleteFolios(ps);
             return Done.getInstance();

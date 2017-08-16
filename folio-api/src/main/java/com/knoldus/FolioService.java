@@ -14,8 +14,8 @@ import static com.lightbend.lagom.javadsl.api.transport.Method.*;
 
 public interface FolioService extends Service {
 
-    ServiceCall<NotUsed, Optional<Folio>> folio(Optional<String> shipCode,
-                                                Optional<String> sailDate, Optional<Integer> paxId, Optional<Integer> chargeId );
+    ServiceCall<NotUsed, Optional<Folio>> folio(Optional<String> shipCode, Optional<String> sailDate,
+                                                Optional<Integer> paxId, Optional<Integer> chargeId );
     ServiceCall<Folio, Done> newFolio();
 
     ServiceCall<Folio, Done> updateFolio(Optional<String> shipCode,
